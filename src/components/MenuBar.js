@@ -1,6 +1,6 @@
-import React from "react";
+import React, {useState} from "react";
 
-function MenuBar(props) {
+function MenuBar({stateSetter}) {
   /*
 
   The 'span' tags below are the menu items. Think about the way a menu 
@@ -12,21 +12,29 @@ function MenuBar(props) {
 
   */
 
+  const [active, setActive] = useState(false)
+
+  function handleClick(e) {
+    let id = e.currentTarget.id
+    setActive(id)
+    stateSetter(id)
+  }
+
   return (
     <div className="ui four item menu">
-      <span className="item active">
+      <span className={active === "profile" ? 'item active' : 'item'} id="profile" onClick={handleClick}>
         <i className="user large icon" />
       </span>
 
-      <span className="item">
+      <span className={active === "photos" ? 'item active' : 'item'} id="photos" onClick={handleClick}>
         <i className="photo large icon" />
       </span>
 
-      <span className="item">
+      <span className={active === "cocktails" ? 'item active' : 'item'} id="cocktails" onClick={handleClick}>
         <i className="cocktail large icon" />
       </span>
 
-      <span className="item">
+      <span className={active === "pokemon" ? 'item active' : 'item'} id="pokemon" onClick={handleClick}>
         <i className=" themeisle large icon" />
       </span>
     </div>
